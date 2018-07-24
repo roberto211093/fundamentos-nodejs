@@ -1,0 +1,26 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Esta es una libreria para el curso de Node.js en Devcode.la",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "Rafael Acosta <rafael.r.acosta.m.93@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.3.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "formidable": "^1.2.1",
+    "mongoose": "^5.2.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "quickthumb": "0.0.12",
+    "slug": "^0.9.1",
+    "swig": "^1.4.2"
+  }
+}
