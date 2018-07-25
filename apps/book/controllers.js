@@ -4,9 +4,7 @@ var express = require('express'),
 	formidable = require('formidable'),//llamamos a formidable para guardar las img's de los libros
 	path = require('path'),//path es un modulo que esta en el nucleo de Node que sirve para manejar las rutas de nuestros sistemas de archivos
 	slug = require('slug'),
-	/*
 	fs = require('fs'),
-	*/
 	Book = require('./models').Book,//llamamos al modelo libro
 	isLoggedIn = require('../user/middlewares').isLoggedIn;//llamamos a isLoggedIn
 
@@ -35,7 +33,7 @@ router.route('/libro/:book_slug')
 		//'media' es el nombre de la carpeta en donde van a estar las imagenes
 		//'books' es el nombre de la carpeta especifica donde guardamos las imagenes, es decir, 'books' estara dentro de 'media'
 		form.uploadDir = path_file;//creamos la variable form.uploadDir, esto lo que nos dice es en donde vamos a subir la imagen
-		return;
+		//return;
 		form.parse(req, function (err, fields, files) {//form.parse le pasamos el request, la funcion, el error, los campos, y los archivos
 			console.log(files);
 			console.log(fields);
@@ -44,17 +42,19 @@ router.route('/libro/:book_slug')
 				slug : slug(fields.title.toLowerCase()),//slug de la img del libro
 				summary : fields.summary,//resumen
 				author : fields.author,//autor
-			});
 				image : req.MEDIA_URL + '/books/' + files.image.name//imagen
 			});
+				//image : req.MEDIA_URL + '/books/' + files.image.name//imagen
 			book.save(function (err) {
 				if (err) {//Si hay un error
 					console.log(err);
+					return;
 				};
 			});
+		});
 		form.on('end', function (fields, files) {
-			var file_name = this.openedFiles[0].path;
-			var new_file_name = this.openedFiles[0].name;
+		var file_name = this.openedFiles[0].path;
+		var new_file_name = this.openedFiles[0].name;
 			fs.rename(file_name, path_file + '/' + new_file_name, function (err, stats){
 				if (err) {console.log(err)};
 				res.redirect('/admin/crear-libro/');
